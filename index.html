@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> YtubeFetch </title>
+    <link rel="shortcut icon" href="res/Ytube.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+<div class="main_container">
+
+<header>
+<div class="" id="liveAlertPlaceholder"></div>
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+    <a class="navbar-brand" href="/"><img src="res/Ytube.png"> YtubeFetch</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" class="" role="search" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#yt_contents">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#FAQ">FAQ</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Other Downloaders
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">youtube downloader</a></li>
+            <li><a class="dropdown-item" href="#">Facebook downloader</a></li>
+            <li><a class="dropdown-item" href="#">instagram downloader</a></li>
+            <li><a class="dropdown-item" href="#">twitter downloader</a></li>
+        </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Terms of service</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>  
+</header>
+    <main>
+        
+<div class="yt_hero">
+    <div class="yt_hero_text">Download <br/>your favourite<br/><b style="color: red">youtube</b> videos</div>
+    <p class="yt_hero_text_sub">Our downloads are fast and free! 🚀</p>
+
+    <form class="form-inline my-2 my-lg-0">
+        <div class="input_box">
+            <input class="yt_search" type="url" id="urlInput" placeholder="Enter or paste your video url" required>
+            <i style="font-size: large;" class="bi bi-clipboard" id="pasteButton"></i>
+        </div>
+        <button class="yt_search_go" type="button" onclick="fetchVideoInfo()" id="getVidBtn">Get Video</button>
+
+<div id="yt_vid_details">
+        <div class="yt_thumb_container" style="width: 100% !important; margin: 0 auto !important; padding: 10px 0px 10px 0px;">
+            <img class="yt_thumbnail" id="thumbnailImg" src="" alt="Thumbnail">
+        </div>
+        <p>Choose resolution</p>
+        <table id="videoTable" class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Resolution</th>
+                    <th>Size</th>
+                    <th>Download Link</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <!-- Table body will be populated by JavaScript -->
+            </tbody>
+        </table>
+</div>
+    </form>
+    </div>
+  
+<div class="yt_contents" id="yt_contents">
+    <div class="yt_title">Why choose YtubeFetch?</div>
+    <p class="yt_content">YtubeFetch is a free online YouTube video downloader that allows you to download videos in a variety of formats and qualities including MP4, AVI.
+        It is easy to use and does not require any registration. it also enables users to download subtitles of videos they want to download.
+        </p>
+    <div class="yt_contents_sub">
+        <div class="yt_home_item green">
+            <span><i class="bi bi-speedometer2"></i></span>
+            <div class="yt_hi_title">Ligthening speed</div>
+            <div class="yt_hi_content">Experience the fastest download speeds, ensuring you get your videos in a flash. No more waiting around; tubeFetch accelerates your entertainment.</div>
+        </div>
+        <div class="yt_home_item blue">
+            <span><i class="bi bi-badge-hd-fill"></i></span>
+            <div class="yt_hi_title">HD Quality Preservation</div>
+            <div class="yt_hi_content">Your favorite videos deserve the best quality. SwiftTube maintains the high definition of your downloaded content, so you can relish every detail without compromise.</div>
+        </div>
+            <div class="yt_home_item red">
+            <span><i class="bi bi-shield-lock-fill"></i></span>
+            <div class="yt_hi_title">Unrestricted Access</div>
+            <div class="yt_hi_content">SwiftTube gives you the freedom to download an array of videos – tutorials, music, vlogs, and more – fostering your personal collection without limitations.</div>
+        </div>
+    </div>
+     
+</div>
+
+<div class="yt_contents">
+    <div class="yt_title" style="text-align: center;" id="FAQ">FREQUENTLY ASKED QUESTIONS (FAQ)</div>
+  
+    <div class="yt_contents_sub2">
+        <div class="yt_home_item2 grey">
+            <!-- <span><i class="bi bi-speedometer2"></i></span> -->
+            <div class="yt_hi_title">How to Download YouTube Videos?</div>
+            <div class="yt_hi_content">To download a YouTube video from <a class="yt_link" href="/">YtubeFetch.com</a>, simply follow these steps: <br/>
+                <ol>
+                    <li>Copy the url/link of the video you want to download from youtube </li>
+                    <li>Go to the <a class="yt_link" href="/">YtubeFetch.com</a> website and paste the URL of the YouTube video you want to download into the search bar and click "Enter".</li>
+                    <li>Select the format and quality of the video you want to download.</li>
+                    <li>To add subtite to your video, enable the subtitle button.</li>
+                    <li>Click on the "Download" button again.</li>
+            </div>
+        </div>
+       
+    </div>
+     
+</div>
+ 
+
+</main>
+
+<footer>
+    <div class="yt_footer">&copy; 2023 tubefetch, All rights reserved.</div>
+</footer>
+
+<style>
+
+#downloadLinks{
+    display: flex;
+    flex-direction: column;
+}
+
+th, td{
+    text-align: left;
+    padding: 15px;
+}
+table{
+ 
+}
+
+</style>
+
+</div>
+
+<script>
+    let getVidBtn = document.getElementById("getVidBtn");
+    const yt_vid_details = document.getElementById("yt_vid_details");
+    yt_vid_details.style.display = "none";
+
+     function fetchVideoInfo() {
+        ///show loading state to users so they can be happy.....
+        /// disable the download button to avoid excessive sending of requests.....
+            getVidBtn.innerHTML = "<div class='spinner-border' role='status'><span class='visually-hidden'>Loading...</span></div>"
+            getVidBtn.disabled = true;
+
+            
+            const url = document.getElementById('urlInput').value;
+            if (url) {
+                fetch(`http://127.0.0.1:5000/api/video_info?url=${encodeURIComponent(url)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const resolutionsList = document.getElementById('resolutionsList');
+                        const sizeList = document.getElementById('sizeList');
+                        const tableBody = document.getElementById('tableBody');
+                        tableBody.innerHTML = ''; // Clear the table body before populating new data
+
+                        data.resolutions.forEach(resolution => {
+                            const row = document.createElement('tr');
+
+                            const resolutionCell = document.createElement('td');
+                            resolutionCell.textContent = resolution.resolution;
+                            row.appendChild(resolutionCell);
+
+                            const sizeCell = document.createElement('td');
+                            sizeCell.textContent = `${Math.round(resolution.size_mb * 100) / 100} MB`;
+                            row.appendChild(sizeCell);
+
+                            const downloadCell = document.createElement('td');
+                            const downloadLink = document.createElement('a');
+                            downloadLink.setAttribute("class", "download_btn");
+                            downloadLink.href = `http://127.0.0.1:5000${resolution.download_link}`;
+                            downloadLink.innerHTML = "<i class='bi bi-cloud-arrow-down-fill'></i> download";
+                            downloadLink.target = "_blank";
+                            downloadLink.download = true;
+                            downloadCell.appendChild(downloadLink);
+                            row.appendChild(downloadCell);
+
+                            tableBody.appendChild(row);
+                        });
+                        const thumbnailImg = document.getElementById('thumbnailImg');
+                        thumbnailImg.src = data.thumbnail_url;
+
+
+                        //re-enable all things new as a new creature wey you be :)....
+                        getVidBtn.innerHTML = "Get New video";
+                        getVidBtn.disabled = false;
+                        yt_vid_details.style.display = "block";
+                        
+                    })
+                    .catch(error => {
+                        console.error('Error fetching video info:', error);
+                    });
+            }
+        }
+</script>
+</body>
+</html>
