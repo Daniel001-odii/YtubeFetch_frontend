@@ -163,6 +163,8 @@ table{
     const yt_vid_details = document.getElementById("yt_vid_details");
     yt_vid_details.style.display = "none";
 
+    const api_url = "https://techzone-form-ccb2240b74a4.herokuapp.com"
+
      function fetchVideoInfo() {
         ///show loading state to users so they can be happy.....
         /// disable the download button to avoid excessive sending of requests.....
@@ -172,7 +174,7 @@ table{
             
             const url = document.getElementById('urlInput').value;
             if (url) {
-                fetch(`http://127.0.0.1:5000/api/video_info?url=${encodeURIComponent(url)}`)
+                fetch(`${api_url}/api/video_info?url=${encodeURIComponent(url)}`)
                     .then(response => response.json())
                     .then(data => {
                         const resolutionsList = document.getElementById('resolutionsList');
@@ -194,7 +196,7 @@ table{
                             const downloadCell = document.createElement('td');
                             const downloadLink = document.createElement('a');
                             downloadLink.setAttribute("class", "download_btn");
-                            downloadLink.href = `http://127.0.0.1:5000${resolution.download_link}`;
+                            downloadLink.href = `${api_url}${resolution.download_link}`;
                             downloadLink.innerHTML = "<i class='bi bi-cloud-arrow-down-fill'></i> download";
                             downloadLink.target = "_blank";
                             downloadLink.download = true;
