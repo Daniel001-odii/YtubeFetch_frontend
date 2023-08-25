@@ -18,7 +18,11 @@
 <div class="main_container">
 
 <header>
-<div class="" id="liveAlertPlaceholder"></div>
+     <div class="alert alert-danger fade show" role="alert" style="text-align: center;">
+        🧪 Welcome to our deliciously early beta buffet! We're cooking up awesomeness and could use some brave taste-testers. Care to join the flavor fiesta?" 🚀👩‍🍳👨‍🍳
+      </div>
+
+
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
     <a class="navbar-brand" href="/"><img src="res/Ytube.png"> YtubeFetch</a>
@@ -100,12 +104,12 @@
         <div class="yt_home_item blue">
             <span><i class="bi bi-badge-hd-fill"></i></span>
             <div class="yt_hi_title">HD Quality Preservation</div>
-            <div class="yt_hi_content">Your favorite videos deserve the best quality. SwiftTube maintains the high definition of your downloaded content, so you can relish every detail without compromise.</div>
+            <div class="yt_hi_content">Your favorite videos deserve the best quality. YtubeFetch maintains the high definition of your downloaded content, so you can relish every detail without compromise.</div>
         </div>
             <div class="yt_home_item red">
             <span><i class="bi bi-shield-lock-fill"></i></span>
             <div class="yt_hi_title">Unrestricted Access</div>
-            <div class="yt_hi_content">SwiftTube gives you the freedom to download an array of videos – tutorials, music, vlogs, and more – fostering your personal collection without limitations.</div>
+            <div class="yt_hi_content">YtubeFetch gives you the freedom to download an array of videos – tutorials, music, vlogs, and more – fostering your personal collection without limitations.</div>
         </div>
     </div>
      
@@ -149,6 +153,7 @@
 th, td{
     text-align: left;
     padding: 15px;
+    vertical-align: middle;
 }
 table{
  
@@ -220,6 +225,23 @@ table{
                     });
             }
         }
+
+    const pasteButton = document.getElementById('pasteButton');
+    const inputBox = document.getElementById('urlInput');
+    pasteButton.addEventListener('click', () => {
+      // Check if the browser supports the Clipboard API
+      if (navigator.clipboard) {
+        navigator.clipboard.readText()
+          .then(copiedText => {
+            inputBox.value = copiedText;
+          })
+          .catch(error => {
+            console.error('Error reading clipboard:', error);
+          });
+      } else {
+        console.error('Clipboard API not supported');
+      }
+    });
 </script>
 </body>
 </html>
