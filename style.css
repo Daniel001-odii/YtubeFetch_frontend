@@ -156,6 +156,9 @@ button:disabled{
     border-radius: 10px;
     margin: 15px 0px;
 }
+.yt_home_item:hover{
+    scale: 1.1;
+}
 
 .yt_home_item2{
     padding: 20px;
