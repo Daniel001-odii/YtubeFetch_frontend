@@ -214,14 +214,8 @@ table{
     const yt_vid_details = document.getElementById("yt_vid_details");
     yt_vid_details.style.display = "none";
 
-    const error_screen = document.getElementById("message_box");
-    // const url = document.getElementById('urlInput').value;
-    // const noLinkAlert = document.getElementById("noLinkAlert");
-    
-    // noLinkAlert.style.display = "none";
 
-    // const yt_audio_details = document.getElementById("yt_audio_details");
-    // yt_audio_details.style.display = "none";
+    const error_screen = document.getElementById("message_box");
 
     function showError(message){
         error_screen.innerHTML = `
@@ -327,7 +321,7 @@ table{
 
                         showError( `Error fetching video info: ${error}`);
                         
-                        console.error('Error fetching video info:', error);
+                        // console.error('Error fetching video info:', error);
                     });
             }
         }
