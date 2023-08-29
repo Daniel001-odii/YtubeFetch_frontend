@@ -49,9 +49,11 @@
 
 <header>
       <div class="alert alert-primary alert-dismissible fade show" role="alert">
-        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
+        <!-- <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg><br/> -->
         Welcome to our early testing and beta mode, we want to be sure we give you get the best experience!<br/>
-        <strong>Whats new: </strong><br/>Extra video download qualities. <br/><i><small>Low on data? dont worry we got you covered</small></i>
+        <strong>Whats new: </strong><br/>
+        <li>Extra video download qualities. </li>
+        <li>Audio formats now available!</li>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
 
@@ -115,7 +117,7 @@
         <div class="yt_thumb_container" style="width: 100% !important; margin: 0 auto !important; padding: 10px 0px 10px 0px;">
             <img class="yt_thumbnail" id="thumbnailImg" src="" alt="Thumbnail">
         </div>
-        <h2>Select your preffered download</h3>
+        <h4>Select your preffered download</h4>
         <table id="videoTable" class="table table-hover">
             <thead>
                 <tr>
@@ -230,8 +232,8 @@ table{
     setInterval(function(){error_screen.innerHTML = ''}, 8000);
     }
 
-    // const api_url = "http://127.0.0.1:5000"
-    const api_url = "https://techzone-form-ccb2240b74a4.herokuapp.com"
+    const api_url = "http://127.0.0.1:5000"
+    // const api_url = "https://techzone-form-ccb2240b74a4.herokuapp.com"
 
      function fetchVideoInfo() {
         if(document.getElementById('urlInput').value == ""){
@@ -258,7 +260,7 @@ table{
                             const row = document.createElement('tr');
 
                             const resolutionCell = document.createElement('td');
-                            resolutionCell.textContent =resolution.format + "-" + resolution.resolution;
+                            resolutionCell.textContent = resolution.format + "-" + resolution.resolution;
                             row.appendChild(resolutionCell);
 
                             const sizeCell = document.createElement('td');
