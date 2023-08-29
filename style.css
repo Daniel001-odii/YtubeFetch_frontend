@@ -229,9 +229,14 @@ button:disabled{
 }
 
 .input_box > i{
-    font-size: 40px;
+    /* font-size: 40px; */
     padding: 10px;
     cursor: pointer;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
 .table>tbody {

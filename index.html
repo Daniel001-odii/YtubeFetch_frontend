@@ -35,11 +35,27 @@
 
 <body>
 <div class="main_container">
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+        </symbol>
+        <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+        </symbol>
+        <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+        </symbol>
+    </svg>
 
 <header>
-     <div class="alert alert-danger fade show" role="alert" style="text-align: center;">
-        🧪 Welcome to our deliciously early beta buffet! We're cooking up awesomeness and could use some brave taste-testers. Care to join the flavor fiesta?" 🚀👩‍🍳👨‍🍳
+      <div class="alert alert-primary alert-dismissible fade show" role="alert">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
+        Welcome to our early testing and beta mode, we want to be sure we give you get the best experience!<br/>
+        <strong>Whats new: </strong><br/>Extra video download qualities. <br/><i><small>Low on data? dont worry we got you covered</small></i>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
+
+      
 
 
 <nav class="navbar navbar-expand-lg">
@@ -81,18 +97,25 @@
     <div class="yt_hero_text">Download <br/>your favourite<br/><b style="color: red">youtube</b> videos</div>
     <p class="yt_hero_text_sub">Our downloads are fast and free! 🚀</p>
 
+    <div id="message_box">
+
+    </div>
+
+
     <form class="form-inline my-2 my-lg-0">
         <div class="input_box">
             <input class="yt_search" type="url" id="urlInput" placeholder="Enter or paste your video url" required>
             <i style="font-size: large;" class="bi bi-clipboard" id="pasteButton"></i>
         </div>
         <button class="yt_search_go" type="button" onclick="fetchVideoInfo()" id="getVidBtn">Get Video</button>
+    </form>
+
 
 <div id="yt_vid_details">
         <div class="yt_thumb_container" style="width: 100% !important; margin: 0 auto !important; padding: 10px 0px 10px 0px;">
             <img class="yt_thumbnail" id="thumbnailImg" src="" alt="Thumbnail">
         </div>
-        <p>Choose resolution</p>
+        <h2>Select your preffered download</h3>
         <table id="videoTable" class="table table-hover">
             <thead>
                 <tr>
@@ -106,7 +129,11 @@
             </tbody>
         </table>
 </div>
-    </form>
+<div class="yt_audio_details" id="yt_audio_details">
+    <div class="audioFormatsList" id="audioFormatsList"></div>
+</div>
+
+
     </div>
   
 <div class="yt_contents" id="yt_contents">
@@ -187,9 +214,35 @@ table{
     const yt_vid_details = document.getElementById("yt_vid_details");
     yt_vid_details.style.display = "none";
 
-    const api_url = "https://techzone-form-ccb2240b74a4.herokuapp.com"
+    const error_screen = document.getElementById("message_box");
+    // const url = document.getElementById('urlInput').value;
+    // const noLinkAlert = document.getElementById("noLinkAlert");
+    
+    // noLinkAlert.style.display = "none";
+
+    // const yt_audio_details = document.getElementById("yt_audio_details");
+    // yt_audio_details.style.display = "none";
+
+    function showError(message){
+        error_screen.innerHTML = `
+    <div class="alert alert-warning d-flex align-items-center alert-dismissible fade show" role="alert" id="noLinkAlert">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+        <div>
+           ${message}
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>`;
+
+    setInterval(function(){error_screen.innerHTML = ''}, 8000);
+    }
+
+    const api_url = "http://127.0.0.1:5000"
 
      function fetchVideoInfo() {
+        if(document.getElementById('urlInput').value == ""){
+           showError("Oops, looks like you forgot to paste your link");
+        }
+        else{
         ///show loading state to users so they can be happy.....
         /// disable the download button to avoid excessive sending of requests.....
             getVidBtn.innerHTML = "<div class='spinner-border' role='status'><span class='visually-hidden'>Loading...</span></div>"
@@ -205,12 +258,12 @@ table{
                         const sizeList = document.getElementById('sizeList');
                         const tableBody = document.getElementById('tableBody');
                         tableBody.innerHTML = ''; // Clear the table body before populating new data
-
+                        // console.log("this is the returned data: " + data.audio_formats)
                         data.resolutions.forEach(resolution => {
                             const row = document.createElement('tr');
 
                             const resolutionCell = document.createElement('td');
-                            resolutionCell.textContent = resolution.resolution;
+                            resolutionCell.textContent =resolution.format + "-" + resolution.resolution;
                             row.appendChild(resolutionCell);
 
                             const sizeCell = document.createElement('td');
@@ -233,6 +286,34 @@ table{
                         thumbnailImg.src = data.thumbnail_url;
 
 
+                        // Populate audio formats
+                // Display best audio download if available
+                if (data.audio) {
+                    console.log("audio file found!")
+                    const audioRow = document.createElement('tr');
+
+                    const audioFormatCell = document.createElement('td');
+                    audioFormatCell.textContent = "Audio - " + data.audio.format;
+                    audioRow.appendChild(audioFormatCell);
+
+                    const audioSizeCell = document.createElement('td');
+                    audioSizeCell.textContent = `${Math.round(data.audio.size_mb * 100) / 100} MB`;
+                    audioRow.appendChild(audioSizeCell);
+
+                    const audioDownloadCell = document.createElement('td');
+                    const audioDownloadLink = document.createElement('a');
+                    audioDownloadLink.setAttribute("class", "download_btn");
+                    audioDownloadLink.href = `${api_url}${data.audio.download_link}`;
+                    audioDownloadLink.innerHTML = "<i class='bi bi-cloud-arrow-down-fill'></i> download";
+                    audioDownloadLink.target = "_blank";
+                    audioDownloadLink.download = true;
+                    audioDownloadCell.appendChild(audioDownloadLink);
+                    audioRow.appendChild(audioDownloadCell);
+
+                    tableBody.appendChild(audioRow);
+                }else{console.log("no audio file found!")}
+
+
                         //re-enable all things new as a new creature wey you be :)....
                         getVidBtn.innerHTML = "Get New video";
                         getVidBtn.disabled = false;
@@ -240,10 +321,17 @@ table{
                         
                     })
                     .catch(error => {
+                         //re-enable all things new as a new creature wey you be :)....
+                         getVidBtn.innerHTML = "Get New video";
+                        getVidBtn.disabled = false;
+
+                        showError( `Error fetching video info: ${error}`);
+                        
                         console.error('Error fetching video info:', error);
                     });
             }
         }
+    }
 
     const pasteButton = document.getElementById('pasteButton');
     const inputBox = document.getElementById('urlInput');
