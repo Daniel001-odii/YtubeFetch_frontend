@@ -57,6 +57,7 @@
                             const downloadLink = document.createElement('a');
                             downloadLink.setAttribute("class", "download_btn");
                             if(resolution.resolution == null){
+                                downloadLink.style.display = "none !important";
                                 downloadLink.href = "/#";
                                 downloadLink.target = null;
                                 downloadLink.download = false;
@@ -64,11 +65,13 @@
                             }else{downloadLink.href = `${api_url}${resolution.download_link}`;
                             downloadLink.download = true;
                             downloadLink.target = "_blank";
-                            }
+                            
+                           
                             downloadLink.innerHTML = "<i class='bi bi-cloud-arrow-down-fill'></i> download";
                             downloadCell.appendChild(downloadLink);
                             row.appendChild(downloadCell);
                             tableBody.appendChild(row);
+                            }
                         });
                         const thumbnailImg = document.getElementById('thumbnailImg');
                         thumbnailImg.src = data.thumbnail_url;
