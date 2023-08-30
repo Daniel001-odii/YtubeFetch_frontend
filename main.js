@@ -67,7 +67,7 @@
                             downloadLink.target = "_blank";
                             
                            
-                            downloadLink.innerHTML = "<i class='bi bi-cloud-arrow-down-fill'></i> download";
+                            downloadLink.innerHTML = "<i class='bi bi-cloud-arrow-down-fill'></i> <small>download</small>";
                             downloadCell.appendChild(downloadLink);
                             row.appendChild(downloadCell);
                             tableBody.appendChild(row);
@@ -95,7 +95,7 @@
                     const audioDownloadLink = document.createElement('a');
                     audioDownloadLink.setAttribute("class", "download_btn");
                     audioDownloadLink.href = `${api_url}${data.audio.download_link}`;
-                    audioDownloadLink.innerHTML = "<i class='bi bi-cloud-arrow-down-fill'></i> download";
+                    audioDownloadLink.innerHTML = "<i class='bi bi-cloud-arrow-down-fill'></i> <small>download</small>";
                     audioDownloadLink.target = "_blank";
                     audioDownloadLink.download = true;
                     audioDownloadCell.appendChild(audioDownloadLink);
