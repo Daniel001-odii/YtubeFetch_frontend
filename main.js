@@ -64,7 +64,7 @@
                                 downloadLink.onclick = function(){showError( "Sorry that format is not downloadable!")} 
                             }else{downloadLink.href = `${api_url}${resolution.download_link}`;
                             downloadLink.download = true;
-                            downloadLink.target = "_blank";
+                            downloadLink.target = "download_success.html";
                             
                            
                             downloadLink.innerHTML = "<i class='bi bi-cloud-arrow-down-fill'></i> <small>download</small>";
@@ -94,9 +94,10 @@
                     const audioDownloadCell = document.createElement('td');
                     const audioDownloadLink = document.createElement('a');
                     audioDownloadLink.setAttribute("class", "download_btn");
+                    audioDownloadLink.setAttribute("id", "audio_download");
                     audioDownloadLink.href = `${api_url}${data.audio.download_link}`;
                     audioDownloadLink.innerHTML = "<i class='bi bi-cloud-arrow-down-fill'></i> <small>download</small>";
-                    audioDownloadLink.target = "_blank";
+                    audioDownloadLink.target = "download_success.html";
                     audioDownloadLink.download = true;
                     audioDownloadCell.appendChild(audioDownloadLink);
                     audioRow.appendChild(audioDownloadCell);
