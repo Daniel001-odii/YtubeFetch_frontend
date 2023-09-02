@@ -1,3 +1,19 @@
+  //asking users for feedback?
+  let user_downloads = Number(localStorage.getItem("user_downloads"));
+
+function checkVisits(){
+  if(user_downloads >= 0){
+    user_downloads++;
+    localStorage.setItem("user_downloads", String(user_downloads));
+    if(user_downloads%3 == 0){alert("please we need your feedback!")};
+
+  }else if(localStorage.getItem("user_downloads" == null)){localStorage.setItem("user_downloads", "0")};
+  };
+
+console.log("number of visits: ", localStorage.getItem("user_downloads"));
+
+
+  
   let getVidBtn = document.getElementById("getVidBtn");
     const yt_vid_details = document.getElementById("yt_vid_details");
     yt_vid_details.style.display = "none";
@@ -22,6 +38,9 @@
     const api_url = "https://techzone-form-ccb2240b74a4.herokuapp.com"
 
      function fetchVideoInfo() {
+        checkVisits();
+
+
         if(document.getElementById('urlInput').value == ""){
            showError("Oops, looks like you forgot to paste your link");
         }
