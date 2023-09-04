@@ -263,8 +263,8 @@ footer{
     align-items: center;
     padding: 30px 0px;
     font-size: 14px;
-    background: #02022b;
-    color: #fff;
+    /* background: #02022b; */
+    color: #000000;
     gap: 15px;
 }
 .footer-list-head{
@@ -278,11 +278,16 @@ footer{
 .footer-list-head > li{
     /* padding: 5px 0px; */
 }
-.footer-list, a{
+.footer-list-head > li{
     text-decoration: none;
-    color: #fff;
+    color: #000000;
     margin-top: 10px;
     cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
 }
 .yt_tiny_2{
     display: flex;
