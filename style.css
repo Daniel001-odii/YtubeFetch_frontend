@@ -177,7 +177,7 @@ button:disabled{
     font-size: 60px;
 }
 .yt_footer{
-    padding: 50px 10px;
+    padding: 10px;
     margin: 0 auto;
     text-align: center;
     color: grey;
@@ -256,6 +256,43 @@ button:disabled{
     border: 1px solid red;
 }
 
+
+footer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 0px;
+    font-size: 14px;
+    background: #02022b;
+    color: #fff;
+    gap: 15px;
+}
+.footer-list-head{
+    list-style-type: none;
+    text-decoration: none;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    margin: 15px 0px;
+}
+.footer-list-head > li{
+    /* padding: 5px 0px; */
+}
+.footer-list, a{
+    text-decoration: none;
+    color: #fff;
+    margin-top: 10px;
+    cursor: pointer;
+}
+.yt_tiny_2{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    /* font-size: small; */
+    gap: 10px;
+}
+
 @keyframes lineAnim {
     0% {left: -40%;}
     50% {left: 20%;width: 80%;}
@@ -279,4 +316,34 @@ button:disabled{
 .grey{
     background: #efefef;
     color: #000;
+}
+
+
+
+
+/* ----------- custom modal styles -------------- */
+.yt_custom_modal_1{
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: fixed;
+    font-size: 5em;
+    font-weight: bolder;
+    z-index: 99999;
+    height: 100vh;
+    width: 100%;
+    background: #eff7ff;
+    color: #1f086a;
+    line-height: 80px;
+}
+
+.modal_dismiss{
+    font-size: 30px;
+    position: absolute;
+    color: #000000;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
 }

@@ -66,7 +66,13 @@
     </div>
   </div>
 
-
+<!-- our custom Modal -->
+<div id="yt_modal" class="yt_custom_modal_1">
+  <span class="modal_dismiss" id="modal_dismiss">&times;</span>
+  <p style="margin: 0; padding: 0;">coming soon!<br/></p>
+  <span style="font-size: 0.2em; color: #000000; line-height: 5;">While we are still working on it, keep enjoying our free <a href="/" style="color: #ff0000;">downloader</a></span>
+  
+</div>
 
 
 
@@ -87,14 +93,13 @@
     </svg>
 
 <header>
-      <div class="alert alert-primary alert-dismissible fade show" role="alert">
-        <!-- <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg><br/> -->
+      <!-- <div class="alert alert-primary alert-dismissible fade show" role="alert">
         Welcome to our early testing and beta mode, we want to be sure we give you get the best experience!<br/>
         <strong>Whats new: </strong><br/>
         <li>Extra video download qualities. </li>
         <li>Audio formats now available!</li>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
+      </div> -->
 
       
 
@@ -118,14 +123,14 @@
             Other Downloaders
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">youtube downloader</a></li>
-            <li><a class="dropdown-item" href="#">Facebook downloader</a></li>
-            <li><a class="dropdown-item" href="#">instagram downloader</a></li>
-            <li><a class="dropdown-item" href="#">twitter downloader</a></li>
+            <li><a class="dropdown-item" onclick="showCustomModal()">youtube downloader</a></li>
+            <li><a class="dropdown-item" onclick="showCustomModal()">Facebook downloader</a></li>
+            <li><a class="dropdown-item" onclick="showCustomModal()">instagram downloader</a></li>
+            <li><a class="dropdown-item" onclick="showCustomModal()">twitter downloader</a></li>
         </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Terms of service</a>
+          <a class="nav-link" href="TOS.html">Terms of service</a>
         </li>
       </ul>
     </div>
@@ -248,7 +253,21 @@
 </main>
 
 <footer>
-    <div class="yt_footer">&copy; 2023 tubefetch, All rights reserved.</div>
+  <div class="tiny-group">
+    <a class="navbar-brand" href="/"><img src="res/Ytube.png"> YtubeFetch</a>
+    <ul class="footer-list-head">
+      <li class="footer-list" onclick="showCustomModal()">youtube downloader</li>
+      <li class="footer-list" onclick="showCustomModal()">Facebook downloader</li>
+      <li class="footer-list" onclick="showCustomModal()">instagram downloader</li>
+      <li class="footer-list" onclick="showCustomModal()">twitter downloader</li>
+    </ul>
+    <div class="yt_tiny_2">
+      <a href="TOS.html">Terms of service</a>
+      <a href="TOS.html">Privacy Policy</a>
+      <a href="https://wa.me/+2348156074667">Contact</a>
+    </div>
+  </div>
+  <div class="yt_footer">&copy; 2023 tubefetch, All rights reserved.</div>
 </footer>
 
 <style>
@@ -272,6 +291,13 @@ table{
 </div>
 
 <script>
+  const modal_dismiss = document.getElementById("modal_dismiss");
+  const yt_modal = document.getElementById("yt_modal");
+  modal_dismiss.onclick = function(){yt_modal.style.display = "none"};
+  
+  function showCustomModal(){
+    yt_modal.style.display = "flex";
+  }
   
 </script>
 
