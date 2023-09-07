@@ -253,7 +253,6 @@ button:disabled{
     position: sticky !important;
     top: 0 !important;
     margin: 0 auto !important;
-    border: 1px solid red;
 }
 
 

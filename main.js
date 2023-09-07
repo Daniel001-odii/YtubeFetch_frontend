@@ -44,12 +44,11 @@ console.log("number of visits: ", localStorage.getItem("user_downloads"));
     setInterval(function(){error_screen.innerHTML = ''}, 8000);
     }
 
-    // const api_url = "http://127.0.0.1:5000"
-    const api_url = "https://techzone-form-ccb2240b74a4.herokuapp.com"
+    const api_url = "http://127.0.0.1:5000"
+    // const api_url = "https://ytubefetch.com/app"
 
      function fetchVideoInfo() {
-        checkVisits();
-
+        // checkVisits();
 
         if(document.getElementById('urlInput').value == ""){
            showError("Oops, looks like you forgot to paste your link");
