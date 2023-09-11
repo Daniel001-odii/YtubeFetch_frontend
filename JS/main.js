@@ -44,8 +44,8 @@ console.log("number of visits: ", localStorage.getItem("user_downloads"));
     setInterval(function(){error_screen.innerHTML = ''}, 8000);
     }
 
-    const api_url = "http://127.0.0.1:5000"
-    // const api_url = "https://ytubefetch.com/app"
+    // const api_url = "http://127.0.0.1:3000"
+    const api_url = "https://ytubefetch.com/app"
 
      function fetchVideoInfo() {
         // checkVisits();
@@ -71,7 +71,9 @@ console.log("number of visits: ", localStorage.getItem("user_downloads"));
                         const tableBody = document.getElementById('tableBody');
                         tableBody.innerHTML = ''; // Clear the table body before populating new data
                         // console.log("this is the returned data: " + data.audio_formats)
-                        console.log(data);
+                        console.log(data.error);
+                        if(data.error){showError(data.error)};
+                        
                         data.resolutions.forEach(resolution => {
                             const row = document.createElement('tr');
 
@@ -130,7 +132,7 @@ console.log("number of visits: ", localStorage.getItem("user_downloads"));
                     const audioDownloadCell = document.createElement('td');
                     const audioDownloadLink = document.createElement('a');
                     audioDownloadLink.setAttribute("class", "download_btn");
-                    audioDownloadLink.setAttribute("id", "audio_download");
+                    // audioDownloadLink.setAttribute("id", "audio_download");
                     audioDownloadLink.href = `${api_url}${data.audio.download_link}`;
                     audioDownloadLink.innerHTML = "<i class='bi bi-cloud-arrow-down-fill'></i> <small>download</small>";
                     audioDownloadLink.target = "download_success.html";
@@ -196,7 +198,8 @@ for (let i = 0; i < buttons.length; i++) {
                          getVidBtn.innerHTML = "Get New video";
                         getVidBtn.disabled = false;
 
-                        showError( `Error fetching video info: ${error}`);
+                        // showError( `Error fetching video info: ${error}`);
+                        console.log("this is the real error: " + error)
                         
                         // console.error('Error fetching video info:', error);
                     });
