@@ -14,12 +14,14 @@ function checkVisits(){
 console.log("number of visits: ", localStorage.getItem("user_downloads"));
 
 
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
 
 
-
-
-
+const downloadModal = new bootstrap.Modal(document.getElementById('downloadModal'));
+const downloadProgressBar = document.getElementById('downloadProgressBar');
+const downloadStatus = document.getElementById('downloadStatus');
 
 
 
@@ -44,10 +46,15 @@ console.log("number of visits: ", localStorage.getItem("user_downloads"));
     setInterval(function(){error_screen.innerHTML = ''}, 8000);
     }
 
-    // const api_url = "http://127.0.0.1:3000"
+    // const api_url = "http://127.0.0.1:5000"
     const api_url = "https://ytubefetch.com/app"
 
-     function fetchVideoInfo() {
+
+
+
+
+
+function fetchVideoInfo() {
         // checkVisits();
 
         if(document.getElementById('urlInput').value == ""){
@@ -81,7 +88,7 @@ console.log("number of visits: ", localStorage.getItem("user_downloads"));
 
                             function checkAudio(){
                             const hasAudio = resolution.hasAudio;
-                            if(hasAudio == false){return " <i style='color:red' class='bi bi-volume-mute-fill'></i>"}else{return " "};
+                            if(hasAudio == false){return " <i data-bs-toggle='tooltip' data-bs-placement='top' data-bs-title='Tooltip on top' style='color:red' class='bi bi-volume-mute-fill'></i>"}else{return " "};
                             };
 
                             resolutionCell.innerHTML = resolution.format + "-" + `<span class="badge bg-success">${resolution.resolution}</span>` + checkAudio();
@@ -94,6 +101,7 @@ console.log("number of visits: ", localStorage.getItem("user_downloads"));
                             const downloadCell = document.createElement('td');
                             const downloadLink = document.createElement('a');
                             downloadLink.setAttribute("class", "download_btn");
+                            downloadLink.setAttribute("data-filename", "example.mp4");
                             if(resolution.resolution == null){
                                 downloadLink.style.display = "none !important";
                                 downloadLink.href = "/#";
@@ -101,10 +109,9 @@ console.log("number of visits: ", localStorage.getItem("user_downloads"));
                                 downloadLink.download = false;
                                 downloadLink.onclick = function(){showError( "Sorry that format is not downloadable!")} 
                             }else{downloadLink.href = `${api_url}${resolution.download_link}`;
+                            downloadLink.href = `${api_url}${resolution.download_link}`;
                             downloadLink.download = true;
-                            downloadLink.target = "download_success.html";
-                            
-                           
+                            // downloadLink.target = "download_success.html";
                             downloadLink.innerHTML = "<i class='bi bi-cloud-arrow-down-fill'></i> <small>download</small>";
                             downloadCell.appendChild(downloadLink);
                             row.appendChild(downloadCell);
@@ -113,6 +120,8 @@ console.log("number of visits: ", localStorage.getItem("user_downloads"));
                         });
                         const thumbnailImg = document.getElementById('thumbnailImg');
                         thumbnailImg.src = data.thumbnail_url;
+                        const vidTitle = document.getElementById("videoTitle");
+                        vidTitle.textContent = data.title;
 
 
                         // Populate audio formats
@@ -141,8 +150,21 @@ console.log("number of visits: ", localStorage.getItem("user_downloads"));
                     audioRow.appendChild(audioDownloadCell);
 
                     tableBody.appendChild(audioRow);
-                }else{console.log("no audio file found!")}
+                }else{console.log("no audio file found!")};
 
+
+                // change button color when download has been initiated.....
+                const downloadButton = document.getElementsByClassName("download_btn");
+                for (const element of downloadButton) {
+                    element.addEventListener('click', function(event){
+                        element.style.background = "grey";
+                        event.preventDefault();
+
+                        console.log(element.href);
+                        showDownloadProgress(element);
+                    }) ;
+                    };
+                  
 
                         //re-enable all things new as a new creature wey you be :)....
                         getVidBtn.innerHTML = "Get New video";
@@ -152,45 +174,37 @@ console.log("number of visits: ", localStorage.getItem("user_downloads"));
 
 
                        // Get the current date and time
-const currentDate = new Date();
+                        const currentDate = new Date();
 
-// Format it in standard form
-const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
-const formattedDate = currentDate.toLocaleString('en-US', options);
+                        // Format it in standard form
+                        const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
+                        const formattedDate = currentDate.toLocaleString('en-US', options);
 
-// Display the formatted date and time
-// document.getElementById('datetime').textContent = formattedDate;
+                        // Display the formatted date and time
+                        // document.getElementById('datetime').textContent = formattedDate;
 
-const input_box = document.getElementById("urlInput");
-let buttons = document.getElementsByClassName("download_btn");
+                        const input_box = document.getElementById("urlInput");
+                        let buttons = document.getElementsByClassName("download_btn");
 
-// Load the existing user record from local storage or create an empty array if it doesn't exist
-let temp_store = JSON.parse(localStorage.getItem("user_record")) || [];
+                        // Load the existing user record from local storage or create an empty array if it doesn't exist
+                        let temp_store = JSON.parse(localStorage.getItem("user_record")) || [];
 
-for (let i = 0; i < buttons.length; i++) {
-    buttons[i].onclick = function () {
-        const record = {
-            "youtube_url": document.getElementById('urlInput').value,
-            "download_url": buttons[i].href,
-            "date_and_time": formattedDate,
-            "thumbnail": data.thumbnail_url,
-        };
+                        for (let i = 0; i < buttons.length; i++) {
+                            buttons[i].onclick = function () {
+                                const record = {
+                                    "youtube_url": document.getElementById('urlInput').value,
+                                    "download_url": buttons[i].href,
+                                    "date_and_time": formattedDate,
+                                    "thumbnail": data.thumbnail_url,
+                                };
 
-        // Push the record to the temp_store array
-        temp_store.push(record);
+                                // Push the record to the temp_store array
+                                temp_store.push(record);
 
-        // Store the temp_store array as a JSON string in local storage
-        localStorage.setItem("user_record", JSON.stringify(temp_store));
-    };
-}
-
-
-
-
-                        
-
-
-
+                                // Store the temp_store array as a JSON string in local storage
+                                localStorage.setItem("user_record", JSON.stringify(temp_store));
+                            };
+                        }
                         
                     })
                     .catch(error => {
@@ -203,10 +217,89 @@ for (let i = 0; i < buttons.length; i++) {
                         
                         // console.error('Error fetching video info:', error);
                     });
+
+
+
+                    
+                    
+
             }
         }
     }
 
 
+    let activeDownload = null; // Global variable to track the active download
 
-
+    function showDownloadProgress(downloadLink) {
+        // Check if there's an active download, and if so, cancel it
+        if (activeDownload) {
+          activeDownload.cancel();
+          activeDownload = null;
+        }
+      
+        // Show the download progress modal
+        downloadModal.show();
+      
+        // Create an anchor element for triggering the download
+        const downloadAnchor = document.createElement('a');
+        downloadAnchor.style.display = 'none'; // Hide the anchor element
+      
+        // Append the anchor to the document body
+        document.body.appendChild(downloadAnchor);
+      
+        // Start the download
+        fetch(downloadLink.href)
+          .then(response => {
+            const contentLength = response.headers.get('Content-Length');
+            let downloaded = 0;
+      
+            const reader = response.body.getReader();
+      
+            function processResult(result) {
+              if (result.done) {
+                // Download completed
+                downloadStatus.textContent = 'Download completed.';
+                setTimeout(() => {
+                  downloadModal.hide();
+                  downloadAnchor.remove(); // Remove the anchor element
+                }, 1000); // Hide the modal after 1 second
+                return;
+              }
+      
+              // Update progress bar and status
+              downloaded += result.value.length;
+              const progress = (downloaded / contentLength) * 100;
+              downloadProgressBar.style.width = progress + '%';
+              downloadProgressBar.textContent = progress.toFixed(2) + '%';
+              downloadStatus.textContent = `Downloading... ${downloaded} / ${contentLength} bytes`;
+      
+              // Continue reading
+              return reader.read().then(processResult);
+            }
+      
+            activeDownload = {
+              cancel: () => {
+                reader.cancel();
+                downloadStatus.textContent = 'Download completed.';
+                downloadProgressBar.style.width = '100%';
+                setTimeout(() => {
+                  downloadModal.hide();
+                  downloadAnchor.remove(); // Remove the anchor element
+                }, 1000); // Hide the modal after 1 second
+              }
+            };
+      
+            reader.read().then(processResult);
+      
+            // Set the anchor's attributes to trigger the download
+            downloadAnchor.href = downloadLink.href;
+            downloadAnchor.download = downloadLink.getAttribute('data-filename'); // Set the download file name
+            downloadAnchor.click(); // Simulate a click to trigger the download
+          })
+          .catch(error => {
+            // Handle download errors here
+            downloadStatus.textContent = 'Download failed.';
+            console.error('Download error:', error);
+          });
+      }
+    

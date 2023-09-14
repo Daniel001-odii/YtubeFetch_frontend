@@ -50,10 +50,9 @@ form, .form{
     font-size: 2.3em;
     font-weight: bold;
     text-align: center;
-    padding: 15px;
     line-height: 40px;
     color: #000;
-    margin-bottom: none;
+    margin-bottom: 0;
 }
 .yt_hero_text_sub{
     margin: none;
@@ -87,6 +86,7 @@ form, .form{
     padding: 15px;
     color: #fff;
     border-radius: 10px;
+    font-weight: bolder;
 }
 button:disabled{
     background: grey;
@@ -305,25 +305,36 @@ footer{
     
 
 .green{
-    background: #a2ffa2;
-    color: #116711;
+    background: #f2f6ff;
+    color: #111;
 }
 .blue{
-    background: #9f9fff;
-    color:#1d1d76;
+    background: #00004A;
+    color:#ffffff;
 }
 .red{
-    background: #fea3a3;
-    color: #771212;
+    background: #ff0000;
+    color: #fff;
 }
 
 .grey{
-    background: #efefef;
-    color: #000;
+    background: #f2f6ff;
+    color: #000000;
 }
 
+.yt_statement{
+    text-align: center;
+    margin-top: 25px;
+}
 
-
+.yt_whatsapp{
+    padding: 10px;
+    background: rgb(48, 229, 48);
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 10px;
+}
 
 /* ----------- custom modal styles -------------- */
 .yt_custom_modal_1{

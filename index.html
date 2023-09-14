@@ -57,26 +57,28 @@
 </head>
 
 <body>
-    <!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Success</h5>
-          <button type="button" class="btn-close btn-secondary" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button> -->
+
+
+<!-- Add this modal structure to your HTML -->
+<div class="modal fade" id="downloadModal" tabindex="-1" aria-labelledby="downloadModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="downloadModalLabel">Your Download is in Progress</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="progress">
+          <div class="progress-bar" id="downloadProgressBar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
         </div>
-        <div class="modal-body">
-          Your download is now in progress. Thank You!
-        </div>
-        <div class="modal-footer">
-          
-        </div>
+        <div id="downloadStatus"></div>
       </div>
     </div>
   </div>
+</div>
+
+
+
 
 <!-- our custom Modal -->
 <div id="yt_modal" class="yt_custom_modal_1">
@@ -102,11 +104,13 @@
     </svg>
 
 <header>
-      <div class="alert alert-primary alert-dismissible fade show" role="alert">
+
+
+      <!-- <div class="alert alert-primary alert-dismissible fade show" role="alert">
         <strong>Whats new: </strong><br/>
         <p>You can now see all your downloaded videos in the <strong>"My downloads"</strong> session of the menu </p>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
+      </div> -->
 
       
 
@@ -134,8 +138,8 @@
             <li><a class="dropdown-item" href="facebook.html">Facebook downloader</a></li>
             <li><a class="dropdown-item" onclick="showCustomModal()">instagram downloader</a></li>
             <li><a class="dropdown-item" onclick="showCustomModal()">twitter downloader</a></li>
-            <!-- <li><a class="dropdown-item" href="pages/downloads.html">My downloads</a></li> -->
-            <li><a class="dropdown-item" href="#">My downloads</a></li>
+            <li><a class="dropdown-item" href="pages/downloads.html">My downloads</a></li>
+            <!-- <li><a class="dropdown-item" href="#">My downloads</a></li> -->
 
         </ul>
         </li>
@@ -148,11 +152,11 @@
 </nav>  
 </header>
     <main >
-        <h1 style="text-align: center; margin-top: 50px;">Youtube video downloader</h1>
-        <h2 style="text-align: center;">Youtube mp4 converter</h2>
+        <h1 style="text-align: center; margin-top: 50px;" class="yt_hero_text"><b style="color: red">Youtube</b> video downloader</h1>
+        <p style="text-align: center;">& <br/> Youtube mp4 converter</p>
 <div class="yt_hero">
-    <h1 class="yt_hero_text">Download <br/>your favourite<br/><b style="color: red">youtube</b> videos</h1>
-    <p class="yt_hero_text_sub">Our downloads are fast and free! 🚀</p>
+    <p>Download your favourite youtube videos <br/> using the video url, its fast and free! 🚀</p>
+    <!-- <p class="yt_hero_text_sub">Our downloads are /p> -->
 
     <div id="message_box">
 
@@ -172,7 +176,8 @@
         <div class="yt_thumb_container" style="width: 100% !important; margin: 0 auto !important; padding: 10px 0px 10px 0px;">
             <img class="yt_thumbnail" id="thumbnailImg" src="" alt="Thumbnail">
         </div>
-        <h5>Select your preffered download</h5>
+        <h5 id="videoTitle"></h5>
+        <small>Select your preffered download</small>
         <a href="#audio_download"><span class='badge bg-info text-dark' style="cursor: pointer; color: #fff;" id="#audio_download">click here for audio</span></a>
         <table id="videoTable" class="table table-hover">
             <thead>
@@ -232,34 +237,59 @@
     <div class="yt_title" style="text-align: center;" id="FAQ">FREQUENTLY ASKED QUESTIONS (FAQ)</div>
   
     <div class="yt_contents_sub2">
-        <div class="yt_home_item2 grey">
-            <!-- <span><i class="bi bi-speedometer2"></i></span> -->
-            <div class="yt_hi_title">How to Download YouTube Videos?</div>
-            <div class="yt_hi_content">To download a YouTube video from <a class="yt_link" href="/">YtubeFetch.com</a>, simply follow these steps: <br/>
-                <ol>
-                    <li>Copy the url/link of the video you want to download from youtube </li>
-                    <li>Go to the <a class="yt_link" href="/">YtubeFetch.com</a> website and paste the URL of the YouTube video you want to download into the search bar and click "Enter".</li>
-                    <li>Select the format and quality of the video you want to download.</li>
-                    <li>To add subtite to your video, enable the subtitle button.</li>
-                    <li>Click on the "Download" button again.</li>
+        <div class="yt_home_item2">
+
+
+          <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  <div class="yt_hi_title">How to Download YouTube Videos?</div>
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    To download a YouTube video from <a class="yt_link" href="https://ytubefetch.com">YtubeFetch.com</a>, simply follow these steps: <br/>
+                    <ol>
+                      <li>Copy the url/link of the video you want to download from youtube </li>
+                      <li>Go to the <a class="yt_link" href="https://ytubefetch.com">YtubeFetch.com</a> website and paste the URL of the YouTube video you want to download into the search bar and click "Enter".</li>
+                      <li>Select the format and quality of the video you want to download.</li>
+                      <li>To add subtite to your video, enable the subtitle button.</li>
+                      <li>Click on the "Download" button again.</li>
+                    </ol>
+                </div>
+              </div>
             </div>
-            <div class="yt_hi_title">What are the supported browsers?</div>
-            <div class="yt_hi_content">Enhance your video downloading experience with YtubeFetch! Our website is optimized to work seamlessly on popular browsers, ensuring you can effortlessly and easily access and download your favorite YouTube videos. 
-              Whether you prefer 
-              <ol>
-              <li>Chrome <i class="fa fa-chrome" aria-hidden="true"></i></li>
-              <li>Opera Mini <i class="fa fa-opera" aria-hidden="true"></i></li>
-              <li>Safari <i class="fa fa-safari" aria-hidden="true"></i></li>
-              <lI>Edge <i class="fa fa-edge" aria-hidden="true"></i></lI>
-              <lI>Firefox <i class="fa fa-firefox" aria-hidden="true"></i></lI>
-            </ol>
-              <br/>YtubeFetch guarantees compatibility and top-notch performance. Say goodbye to compatibility issues and enjoy hassle-free video downloads with YtubeFetch on your preferred browser.</div>
-        </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  <div class="yt_hi_title">What are the supported browsers?</div>
+                </button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                      Enhance your video downloading experience with YtubeFetch! Our website is optimized to work seamlessly on popular browsers, ensuring you can effortlessly and easily access and download your favorite YouTube videos. 
+                  Whether you prefer 
+                  <ol>
+                    <li>Chrome <i class="fa fa-chrome" aria-hidden="true"></i></li>
+                    <li>Opera Mini <i class="fa fa-opera" aria-hidden="true"></i></li>
+                    <li>Safari <i class="fa fa-safari" aria-hidden="true"></i></li>
+                    <lI>Edge <i class="fa fa-edge" aria-hidden="true"></i></lI>
+                    <lI>Firefox <i class="fa fa-firefox" aria-hidden="true"></i></lI>
+                  </ol>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="yt_statement">YtubeFetch guarantees compatibility and top-notch performance. Say goodbye to compatibility issues and enjoy hassle-free video downloads with YtubeFetch on your preferred browser.</p>
+      </div>
        
     </div>
      
 </div>
  
+
+
 
 </main>
 
@@ -277,11 +307,11 @@
       <a href="TOS.html">Privacy Policy</a>
     </div>
     <ul class="footer-list-head">
-      <li><a href="https://wa.me/+2348156074667">
-        <i class="fa fa-whatsapp" aria-hidden="true"></i></a> 
-        <i class="fa fa-facebook-official" aria-hidden="true"></i>
+      <li><a class="yt_whatsapp" href="https://wa.me/+2348156074667">
+        <i class="fa fa-whatsapp" aria-hidden="true"></i> whatsapp</a> 
+        <!-- <i class="fa fa-facebook-official" aria-hidden="true"></i>
         <i class="fa fa-twitter-square" aria-hidden="true"></i>
-        <i class="fa fa-google" aria-hidden="true"></i>
+        <i class="fa fa-google" aria-hidden="true"></i> -->
       </li>
     </ul>
     
